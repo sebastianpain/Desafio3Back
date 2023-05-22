@@ -46,7 +46,7 @@ class productManager{
     }
     
 }
-let newPr = new productManager('./src/productos.json')
+let newPr = new productManager('./productos.json')
 
 //newPr.deleteProducto('dasdsadasdasddswwww2.2s2ssssdads')
 newPr.updateProduct('dasdsadasdasddswwww2.2s2ssssdads.321312',{price: 159999, title:"TITULO MODIFICADO"})
