@@ -2,7 +2,11 @@
   "name": "3desafiobackend",
   "version": "1.0.0",
   "description": "",
+<<<<<<< HEAD
   "main": "app.js",
+=======
+  "main": "./src/app.js",
+>>>>>>> 808b27c6b640b9d4a74d9baffcb5ad476ac19040
   "scripts": {
     
     "start": "nodemon ./src/app.js"
