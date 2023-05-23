@@ -52,3 +52,4 @@ let newPr = new productManager('./productos.json')
 newPr.updateProduct('dasdsadasdasddswwww2.2s2ssssdads.321312',{price: 159999, title:"TITULO MODIFICADO"})
 newPr.getAllProducts()
 //fs.writeFileSync("./productos.json", "[]")
+module.exports = productManager;

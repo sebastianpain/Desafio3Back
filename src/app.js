@@ -1,36 +1,39 @@
-const express = require('express');
-const ProductManager = require('./src/productManager.js');
+const express = require ('express');
+const app= express();
+const productManager = require('../src/productManager.js')
 
-const app = express();
-const productManager = new ProductManager();
+manager= new productManager('./productos.json'); 
 
-// Endpoint para obtener todos los productos
-app.get('/products', (req, res) => {
-  const limit = req.query.limit;
+app.get('/products', async (req,res)=>{
+    try{
+        const limit = req.query.limit;
+        let products = await manager.getProducts();
 
-  if (limit) {
-    const products = productManager.getProducts().slice(0, limit);
-    res.json(products);
-  } else {
-    const products = productManager.getProducts();
-    res.json(products);
-  }
+        if(limit){
+            res.json(products.slice(0,limit));
+            }else{
+                res.json(products)
+        }
+    } catch(error){
+        res.status(500).json({error:'Error al obtener los productos'});
+    }
 });
 
-// Endpoint para obtener un producto por su ID
-app.get('/products/:pid', (req, res) => {
-  const productId = req.params.pid;
-  const product = productManager.getProductById(productId);
+app.get('/products/:pid', async (req, res) => {
+    try{
+        const productId = parseInt(req.params.pid);
+        const product = await manager.getProductById(productId);
 
-  if (product) {
-    res.json(product);
-  } else {
-    res.status(404).json({ error: 'El producto no existe' });
-  }
+        if (product){
+            res.json(product);
+        }else{
+            res.status(404).json({error:'Producto no encontrado'});
+        }
+    }catch (error){
+        res.status(500).json({error:'Error al obtener el producto'});
+    }
 });
 
-// Iniciar el servidor
-const port = 8080;
-app.listen(port, () => {
-  console.log(`Servidor Express iniciado en el puerto ${port}`);
-});
+app.listen('8000', ()=>{
+    console.log('Server escuchado en puerto 8000')
+} )
